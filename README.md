@@ -29,10 +29,10 @@ gcloud auth application-default login
 
 ## 导出数据
 ```
-python -m simulation_research.next_day_wildfire_spread.data_export.export_ee_training_data_main --bucket=gs://next_day_wildfire_nuo_0 --start_date="2020-01-01" --end_date="2021-01-01"
-
 python -m data_export.export_ee_training_data_main --bucket=gs://next_day_wildfire_nuo_0 --start_date="2020-01-01" --end_date="2021-01-01"
 ```
+
+# ======上面网络问题过不去
 
 ## 下载并将解析后的数据储存到本地
 ```
