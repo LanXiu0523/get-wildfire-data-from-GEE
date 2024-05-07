@@ -1,4 +1,4 @@
-git clone https://github.com/google-research/google-research.git
+git clone git@github.com:LanXiu0523/get-wildfire-data-from-GEE.git
 cd next_day_wildfire_spread
 
 python3 -m venv env
