@@ -36,14 +36,13 @@ python -m data_export.export_ee_training_data_main --bucket=gs://next_day_wildfi
 
 ## 下载并将解析后的数据储存到本地
 ```
+# 记得修改tfrecords的路径
 mkdir ../data
 
 gcloud config set project my-project-to-drive-demo-1
-gsutil ls gs://next_day_wildfire_nuo_0#得到tfrecord文件路径A,即下行第一个path处
+gsutil ls gs://next_day_wildfire_nuo_0 #得到tfrecord文件路径A,即下行第一个path处
 
-gsutil cp gs://next_day_wildfire_nuo_0/path/to/tfrecords/*.tfrecord.gz /path/to/your/local/data/  #本地路径/path/to/your/local/data/你自己选一下
+gsutil cp gs://next_day_wildfire_nuo_0/path/to/tfrecords/*.tfrecord.gz ../data
 
-python3 -m simulation_research.next_day_wildfire_spread.data_export.extract_ongoing_fires_main \
---file_pattern="/path/to/your/local/data/*.tfrecord.gz" \
---out_file_prefix="/path/to/your/local/data/" #本地路径
+python -m data_export.extract_ongoing_fires_main --file_pattern="/path/to/your/local/data/*.tfrecord.gz" --out_file_prefix="../data"
 ```
