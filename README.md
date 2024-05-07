@@ -3,8 +3,9 @@
 git clone git@github.com:LanXiu0523/get-wildfire-data-from-GEE.git
 cd get-wildfire-data-from-GEE/next_day_wildfire_spread
 
-python3 -m venv env
-source env/bin/activate
+// 可选：创建虚拟环境
+//python -m venv env
+//source env/bin/activate
 
 pip install -r requirements.txt
 ```
