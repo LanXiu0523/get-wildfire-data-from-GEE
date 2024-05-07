@@ -11,11 +11,7 @@ pip install -r requirements.txt
 ```
 
 ## 安装Google Cloud SDK：
-```
-curl https://sdk.cloud.google.com | bash
-exec -l $SHELL
-gcloud init
-```
+https://blog.csdn.net/nicolelili1/article/details/68947164
 
 ## 设置项目ID
 ```
