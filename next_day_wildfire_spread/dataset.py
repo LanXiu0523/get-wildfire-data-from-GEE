@@ -21,8 +21,8 @@ from typing import Dict, Text, Sequence, Optional, Tuple
 import tensorflow as tf
 from tensorflow import estimator as tf_estimator
 
-from simulation_research.next_day_wildfire_spread import constants
-from simulation_research.next_day_wildfire_spread import image_utils
+import constants
+import image_utils
 from tensorflow.contrib import training as contrib_training
 
 
