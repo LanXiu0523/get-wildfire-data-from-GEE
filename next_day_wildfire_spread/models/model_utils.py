@@ -27,7 +27,7 @@ import tensorflow as tf
 from tensorflow.compat.v2 import keras
 
 
-from simulation_research.next_day_wildfire_spread import file_util
+import file_util
 from tensorflow.contrib import training as contrib_training
 
 CONV2D_FILTERS_DEFAULT = 64
