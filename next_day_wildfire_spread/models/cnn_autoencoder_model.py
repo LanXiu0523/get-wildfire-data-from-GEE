@@ -19,7 +19,7 @@ from typing import Sequence
 import tensorflow.compat.v2 as tf
 from tensorflow.compat.v2 import keras
 
-from simulation_research.next_day_wildfire_spread.models import model_utils
+from models import model_utils
 
 
 def encoder(
