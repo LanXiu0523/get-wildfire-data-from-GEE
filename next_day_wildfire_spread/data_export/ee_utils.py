@@ -89,11 +89,6 @@ DEFAULT_EVAL_SPLIT = 0.2
 DEFAULT_LIMIT_PER_EE_CALL = 60
 DEFAULT_SEED = 123
 
-COORDINATES = {
-    # Used as input to ee.Geometry.Rectangle().
-    'US': [-124, 24, -73, 49]
-}
-
 
 def get_image(data_type):
   """Gets an image corresponding to `data_type`.

@@ -48,7 +48,10 @@ earthengine authenticate
 # bucket：google diver folder start_date：开始日期 end_date：结束日期
 
 # US 
-python -m data_export.export_ee_training_data_main --bucket=gee_US --start_date="2020-01-01" --end_date="2021-01-01"
+python -m data_export.export_ee_training_data_main --bucket=gee_us_stage_1 --start_date="2020-01-01" --end_date="2021-01-01"
+
+# CN_SW
+python -m data_export.export_ee_training_data_main --bucket=gee_cn_sw_stage_1 --start_date="2014-01-01" --end_date="2023-12-31"
 ```
 
 
@@ -64,7 +67,12 @@ python -m data_export.export_ee_training_data_main --bucket=gee_US --start_date=
 pip install immutabledict
 
 # file_pattern: $PATH1 out_file_prefix: $PATH2
+
+# US
 python -m data_export.extract_ongoing_fires_main --file_pattern="D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_us_stage_1\*.tfrecord.gz" --out_file_prefix="D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_us_stage_2\" 
+
+# CN_SW
+python -m data_export.extract_ongoing_fires_main --file_pattern="D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_cn_sw_stage_1\*.tfrecord.gz" --out_file_prefix="D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_cn_sw_stage_2\" 
 ```
 
 

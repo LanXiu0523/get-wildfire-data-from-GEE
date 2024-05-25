@@ -27,6 +27,7 @@ from typing import List, Text, Tuple
 import ee
 
 from data_export import ee_utils
+from data_export import ee_coordinates
 
 
 def _get_all_feature_bands():
@@ -301,13 +302,27 @@ def export_ml_datasets(
 
   for mode in ['train', 'eval', 'test']:
     sub_prefix = f'{mode}_{prefix}'
+
+    # # US
+    # _export_dataset(
+    #     bucket=bucket,
+    #     folder=folder,
+    #     prefix=sub_prefix,
+    #     start_date=start_date,
+    #     start_days=split_days[mode],
+    #     geometry=ee.Geometry.Rectangle(ee_coordinates.COORDINATES_US),
+    #     kernel_size=kernel_size,
+    #     sampling_scale=sampling_scale,
+    #     num_samples_per_file=num_samples_per_file)
+    
+    # CN_SW
     _export_dataset(
         bucket=bucket,
         folder=folder,
         prefix=sub_prefix,
         start_date=start_date,
         start_days=split_days[mode],
-        geometry=ee.Geometry.Rectangle(ee_utils.COORDINATES['US']),
+        geometry=ee.Geometry.Polygon(ee_coordinates.COORDINATES_CN_SW),
         kernel_size=kernel_size,
         sampling_scale=sampling_scale,
         num_samples_per_file=num_samples_per_file)
