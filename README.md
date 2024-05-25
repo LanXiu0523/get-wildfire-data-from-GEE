@@ -1,48 +1,74 @@
-## init
+# Get wildfire data from GEE
+
+## Prepare
+
+安装python、conda、国内需要科学上网。
+
 ```
 git clone git@github.com:LanXiu0523/get-wildfire-data-from-GEE.git
 cd get-wildfire-data-from-GEE/next_day_wildfire_spread
 
-conda create -n gee python=3.7
-conda activate gee
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 
-conda install -c conda-forge google-api-python-client pycryptodome earthengine-api absl-py
+conda create -n gee37 python=3.7
+conda activate gee37
+
+pip install google-api-python-client pycryptodome earthengine-api 
 pip install -r requirements.txt
+
+# 仅国内科学上网需设置，win搜索 代理设置 查看 IP:PORT
+set http_proxy=http://127.0.0.1:7890
+set https_proxy=http://127.0.0.1:7890
 ```
 
-## 安装Google Cloud SDK：
-https://blog.csdn.net/nicolelili1/article/details/68947164
+
+
+## Install Google Cloud SDK：
+
+refer: https://blog.csdn.net/nicolelili1/article/details/68947164
 ```
 gcloud init
-```
-
-## 设置项目ID
-```
-gcloud config set project my-project-to-drive-demo-1
-```
-
-## 设置 ee 
-```
-earthengine authenticate
 gcloud auth application-default login
 ```
 
-## 导出数据
+
+
+## Init ee 
 ```
-python -m data_export.export_ee_training_data_main --bucket=gs://next_day_wildfire_nuo_0 --start_date="2020-01-01" --end_date="2021-01-01"
+earthengine authenticate
 ```
 
-# ======上面网络问题过不去
 
-## 下载并将解析后的数据储存到本地
+
+## Stage_1 export data
+
 ```
-# 记得修改tfrecords的路径
-mkdir ../data
+# bucket：google diver folder start_date：开始日期 end_date：结束日期
 
-gcloud config set project my-project-to-drive-demo-1
-gsutil ls gs://next_day_wildfire_nuo_0 #得到tfrecord文件路径A,即下行第一个path处
-
-gsutil cp gs://next_day_wildfire_nuo_0/path/to/tfrecords/*.tfrecord.gz ../data
-
-python -m data_export.extract_ongoing_fires_main --file_pattern="/path/to/your/local/data/*.tfrecord.gz" --out_file_prefix="../data"
+# US 
+python -m data_export.export_ee_training_data_main --bucket=gee_US --start_date="2020-01-01" --end_date="2021-01-01"
 ```
+
+
+
+## Stage_2 data pre-processing
+
+下载google diver的数据到本地
+`$PATH1：D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_us_stage_1`
+本地新建文件目录用于保存数据输出
+`$PATH2：D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_us_stage_2`
+
+```
+pip install immutabledict
+
+# file_pattern: $PATH1 out_file_prefix: $PATH2
+python -m data_export.extract_ongoing_fires_main --file_pattern="D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_us_stage_1\*.tfrecord.gz" --out_file_prefix="D:\STU_new\workspace\gee\get-wildfire-data-from-GEE\data\gee_us_stage_2\" 
+```
+
+
+
+## More details
+
+refer: https://github.com/google-research/google-research/tree/0ced6d0dc454f50b6900981434ebfcc25e56675a/simulation_research/next_day_wildfire_spread

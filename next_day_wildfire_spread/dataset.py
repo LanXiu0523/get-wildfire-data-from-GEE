@@ -23,7 +23,6 @@ from tensorflow import estimator as tf_estimator
 
 import constants
 import image_utils
-from tensorflow.contrib import training as contrib_training
 
 
 def get_features_dict(

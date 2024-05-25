@@ -226,7 +226,14 @@ def _export_dataset(
 
   file_count = 0
   feature_collection = ee.FeatureCollection([])
+
+  print("================================")
+  print("Total days : " + str(len(all_days)) + ".")
+  count_day = 0
   for start_day in all_days:
+    count_day += 1
+    print("Current day : " + str(start_day) + ".  Export rate: [" + str(count_day) + "/" + str(len(all_days)) + "].")
+    
     window_start = start_date.advance(start_day, 'days')
     time_slices = _get_time_slices(window_start, window, projection,
                                    resampling_scale)
@@ -254,8 +261,10 @@ def _export_dataset(
       feature_collection, file_count = _verify_and_export_feature_collection(
           num_samples_per_file, feature_collection, file_count, features)
   # Export the remaining feature collection
+  print("start of verify")
   _verify_and_export_feature_collection(0, feature_collection, file_count,
                                         features)
+  print("end of verify")
 
 
 def export_ml_datasets(
